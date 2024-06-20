@@ -1,0 +1,173 @@
+DATASET:
+    NAME: TestDataset
+    PARAMETERS:
+        SIZE: 100
+        OUTDIR: TestResults
+        SEED: 6
+
+COSMOLOGY:
+    PARAMETERS:
+        H0: 70
+        Om0: 0.3
+
+IMAGE:
+    PARAMETERS:
+        exposure_time: 90
+        numPix: 100
+        pixel_scale: 0.263
+        psf_type: 'GAUSSIAN'
+        read_noise: 7
+        ccd_gain: 6.083
+
+SURVEY:
+    PARAMETERS:
+        BANDS: g,r,z
+        seeing: 0.9
+        magnitude_zero_point: 30.0
+        sky_brightness: 23.5
+        num_exposures: 10
+
+SPECIES:
+    GALAXY_1:
+        NAME: LENS
+        LIGHT_PROFILE_1:
+            NAME: SERSIC_ELLIPSE
+            PARAMETERS:
+                magnitude: 1000
+                center_x: 0.0
+                center_y: 0.0
+                R_sersic: 6.0
+                n_sersic: 4.0
+                e1: -0.5
+                e2: 0.5
+        MASS_PROFILE_1:
+            NAME: SIE
+            PARAMETERS:
+                theta_E:
+                    DISTRIBUTION:
+                        NAME: lognormal
+                        PARAMETERS:
+                            mean: 0.91629
+                            sigma: 0.405465
+                e1:
+                    DISTRIBUTION:
+                        NAME: uniform
+                        PARAMETERS:
+                            minimum: -0.5
+                            maximum: 0.5
+                e2:
+                    DISTRIBUTION:
+                        NAME: uniform
+                        PARAMETERS:
+                            minimum: -0.5
+                            maximum: 0.5
+                center_x: 0.0
+                center_y: 0.0
+        SHEAR_PROFILE_1:
+            NAME: SHEAR
+            PARAMETERS:
+                gamma1:
+                    DISTRIBUTION:
+                        NAME: lognormal
+                        PARAMETERS:
+                            mean: -3.5065579
+                            sigma: 0.621698
+                gamma2:
+                    DISTRIBUTION:
+                        NAME: lognormal
+                        PARAMETERS:
+                            mean: -3.5065579
+                            sigma: 0.621698   
+    GALAXY_2:
+        NAME: SOURCE
+        LIGHT_PROFILE_1:
+            NAME: SERSIC_ELLIPSE
+            PARAMETERS:
+                magnitude: 17
+                center_x:
+                    DISTRIBUTION:
+                        NAME: uniform
+                        PARAMETERS:
+                            minimum: -1.25
+                            maximum: 1.25
+                center_y:
+                    DISTRIBUTION:
+                        NAME: uniform
+                        PARAMETERS:
+                            minimum: -1.25
+                            maximum: 1.25
+                R_sersic:
+                    DISTRIBUTION:
+                        NAME: lognormal
+                        PARAMETERS:
+                            mean: -0.693147
+                            sigma: 0.693147
+                n_sersic:
+                    DISTRIBUTION:
+                        NAME: lognormal
+                        PARAMETERS:
+                            mean: 0.22314
+                            sigma: 0.81093
+                e1:
+                    DISTRIBUTION:
+                        NAME: uniform
+                        PARAMETERS:
+                            minimum: -0.5
+                            maximum: 0.5
+                e2:
+                    DISTRIBUTION:
+                        NAME: uniform
+                        PARAMETERS:
+                            minimum: -0.5
+                            maximum: 0.5
+        MASS_PROFILE_1:
+            NAME: SIE
+            PARAMETERS:
+                sigma_v:
+                    DISTRIBUTION:
+                        NAME: uniform
+                        PARAMETERS:
+                            minimum: 200.0
+                            maximum: 500.0
+                e1:
+                    DISTRIBUTION:
+                        NAME: uniform
+                        PARAMETERS:
+                            minimum: -0.5
+                            maximum: 0.5
+                e2:
+                    DISTRIBUTION:
+                        NAME: uniform
+                        PARAMETERS:
+                            minimum: -0.5
+                            maximum: 0.5
+                center_x: 0.0
+                center_y: 0.0            
+    NOISE_1:
+        NAME: POISSON_NOISE
+        PARAMETERS:
+            mean: 2.0
+
+
+GEOMETRY:
+    CONFIGURATION_1:
+        NAME: LENSES
+        FRACTION: 1.0
+        PLANE_1:
+            OBJECT_1: LENS
+            PARAMETERS:
+                REDSHIFT:
+                    DISTRIBUTION:
+                        NAME: uniform
+                        PARAMETERS:
+                            minimum: 0.45
+                            maximum: 0.7499
+        PLANE_2:
+            OBJECT_1: SOURCE
+            PARAMETERS:
+                REDSHIFT:
+                    DISTRIBUTION:
+                        NAME: uniform
+                        PARAMETERS:
+                            minimum: 1.0
+                            maximum: 2.0
