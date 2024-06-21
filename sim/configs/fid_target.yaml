@@ -2,7 +2,7 @@ DATASET:
     NAME: TargetData # set a name, this value is only used if you request the h5 file format
     PARAMETERS:
         SIZE: 50000 # number of images in the full datase.
-        OUTDIR: pax_orig_target
+        OUTDIR: ../../data/fid_target
         SEED: 10 
 
 COSMOLOGY:

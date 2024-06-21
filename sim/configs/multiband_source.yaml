@@ -2,7 +2,7 @@ DATASET:
     NAME: SourceData # set a name, this value is only used if you request the h5 file format
     PARAMETERS:
         SIZE: 50000 # number of images in the full datase.
-        OUTDIR: ../src/sim/data/pax_orig_source # will be created on your system if your request to save images
+        OUTDIR: ../../data/mb_source # will be created on your system if your request to save images
         SEED: 10 
 
 COSMOLOGY:
@@ -21,9 +21,9 @@ IMAGE:
 
 SURVEY:
     PARAMETERS:
-        BANDS: g
+        BANDS: g,r,z
         seeing: 0.9
-        magnitude_zero_point: 30.0
+        magnitude_zero_point: 30
         sky_brightness: 23.5
         num_exposures: 10
 
@@ -143,7 +143,7 @@ SPECIES:
 GEOMETRY:
     CONFIGURATION_1:
         NAME: GALAXY_AGN
-        FRACTION: 1
+        FRACTION: 1.0
         PLANE_1:
             OBJECT_1: LENS
             PARAMETERS:
