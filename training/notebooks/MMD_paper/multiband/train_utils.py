@@ -16,7 +16,6 @@ import os
 import json
 
 
-
 # Load data function
 def create_dataloader(img_path, metadata_path, batch_size):
     '''
@@ -99,8 +98,6 @@ class NeuralNetwork(nn.Module):
         self.regressor = nn.Sequential()
         self.regressor.add_module('r_fc1', nn.Linear(in_features=32*5*5, out_features=128))
         self.regressor.add_module('r_relu1', nn.ReLU(True))
-        #self.regressor.add_module('r_fc2', nn.Linear(in_features=128, out_features=64))
-        #self.regressor.add_module('r_relu2', nn.ReLU(True))
         self.regressor.add_module('r_fc3', nn.Linear(in_features=128, out_features=1))
 
     def forward(self, x):
@@ -442,7 +439,7 @@ def generate_isomaps(source_data, target_data, model, n_neighbors = 5, n_compone
     sdata = source_data.reshape([-1, np.prod(source_data.shape[1:])])[:n_points]
     tdata = target_data.reshape([-1, np.prod(target_data.shape[1:])])[:n_points]
     isomap = isomap.fit(sdata)
-    isomap = isomap.fit(tdata)
+    #isomap = isomap.fit(tdata)
     
     with torch.no_grad():
         source_tensor = torch.FloatTensor(source_data[:n_points]).to(device)
@@ -451,7 +448,7 @@ def generate_isomaps(source_data, target_data, model, n_neighbors = 5, n_compone
         tfeat = model.get_feature(target_tensor).cpu().detach().numpy()
         
     train_isomap = train_isomap.fit(sfeat)
-    train_isomap = train_isomap.fit(tfeat)
+    #train_isomap = train_isomap.fit(tfeat)
     trained_source_iso = train_isomap.transform(sfeat)
     trained_target_iso = train_isomap.transform(tfeat)
     
