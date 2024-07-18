@@ -462,3 +462,88 @@ def generate_isomaps(source_data, target_data, model, n_neighbors = 5, n_compone
     target_iso = isomap.transform(tdata)
 
     return source_iso, target_iso, trained_source_iso, trained_target_iso
+
+def show_isomaps(source_iso, 
+                 target_iso, 
+                 trained_source_iso, 
+                 trained_target_iso, 
+                 source_labels,
+                 target_labels,
+                 mod_name, 
+                 epoch_no,
+                 pretrain_lim = 500,
+                 posttrain_lim = 50,
+                 save = False):
+    
+    fig0, axes = plt.subplots(1, 2, figsize=(8, 4))
+
+    (ax1, ax2) = axes
+    ax1.scatter(source_iso[:, 0], source_iso[:, 1], s=3, marker='o')
+    ax1.scatter(target_iso[:, 0], target_iso[:, 1], s=3, marker='^')
+    lval1 = pretrain_lim
+    ax1.set_xlim(-lval1, lval1)
+    ax1.set_ylim(-lval1, lval1)
+    ax1.set_title('Source and Target')
+    
+    ax2.scatter(trained_source_iso[:, 0], trained_source_iso[:, 1], s=3, marker='o')
+    ax2.scatter(trained_target_iso[:, 0], trained_target_iso[:, 1], s=3, marker='^')
+    lval2 = posttrain_lim
+    ax2.set_xlim(-lval2, lval2)
+    ax2.set_ylim(-lval2, lval2)
+    ax2.set_title('Trained Source and Target')
+    
+    ax1.set_xlabel('Component 1')
+    ax1.set_ylabel('Component 2')
+    ax2.set_xlabel('Component 1')
+    ax2.set_ylabel('Component 2')
+    
+    if save:
+        plt.savefig(mod_name + "_" + str(epoch_no) + "_compare.png", bbox_inches = 'tight', dpi = 400)
+        
+    plt.show()
+
+    fig1, ax = plt.subplots(2, 2, figsize=(14, 10))
+
+    ax1 = ax[0][1]
+    scatter1 = ax1.scatter(trained_source_iso[:, 0], trained_source_iso[:, 1], s=3, marker='o', c = source_labels)
+    lval1 = posttrain_lim
+    ax1.set_xlim(-lval1, lval1)
+    ax1.set_ylim(-lval1, lval1)
+    ax1.set_title('Trained Source')
+    
+    ax2 = ax[0][0]
+    ax2.scatter(source_iso[:, 0], source_iso[:, 1], s=3, c = source_labels)
+    lval2 = pretrain_lim
+    ax2.set_xlim(-lval2, lval2)
+    ax2.set_ylim(-lval2, lval2)
+    ax2.set_title('Source')
+    
+    ax1 = ax[1][1]
+    ax1.scatter(trained_target_iso[:, 0], trained_target_iso[:, 1], s=3, marker='o', c = target_labels)
+    lval1 = posttrain_lim
+    ax1.set_xlim(-lval1, lval1)
+    ax1.set_ylim(-lval1, lval1)
+    ax1.set_title('Trained Target')
+    
+    ax2 = ax[1][0]
+    ax2.scatter(target_iso[:, 0], target_iso[:, 1], s=3, c = target_labels)
+    lval2 = pretrain_lim
+    ax2.set_xlim(-lval2, lval2)
+    ax2.set_ylim(-lval2, lval2)
+    ax2.set_title('Target')
+    
+    for i in ax.ravel():
+        i.set_xlabel('Component 1')
+        i.set_ylabel('Component 2')
+    
+    cbar = fig1.colorbar(scatter1, ax=ax.ravel().tolist(), orientation='vertical')
+    cbar.set_label('$\\theta_E$')
+    
+    plt.suptitle("Isomap of Regression Inputs: Before and After", x = 0.44, y = 0.94, fontsize = 20)
+    
+    if save:
+        plt.savefig(mod_name + "_" + str(epoch_no) + "_thetaE.png", bbox_inches = 'tight', dpi = 400)
+        
+    plt.show()
+
+    return fig0, axes, fig1, ax
