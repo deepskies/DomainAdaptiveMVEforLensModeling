@@ -43,3 +43,6 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+
+# Heavy files
+*.fits

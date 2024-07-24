@@ -1,26 +1,37 @@
 DATASET:
   NAME: DELVE_GalGal
   PARAMETERS:
-    SIZE: 80000
-    OUTDIR: delve_galgal_dataset
+    SIZE: 50000
+    OUTDIR: ./../data/delve_source
     SEED: 1738
-BACKGROUNDS:
-  PATH: sim/backgrounds
-  CONFIGURATIONS: ['CONFIGURATION_1', 'CONFIGURATION_2']
-  ITERATE: 1
+  
 DISTRIBUTIONS:
-  USERDIST_2:
-    FILENAME: sim/userdist/source_colors_with_zlens.txt
+  USERDIST_1:
+    FILENAME: ../configs/source_colors_with_zlens.txt
     MODE: sample
+  USERDIST_2:
+    FILENAME: ../configs/user_lens_g.txt
+    MODE: interpolate
+    STEP: 100
+  USERDIST_3:
+    FILENAME: ../configs/user_lens_r.txt
+    MODE: interpolate
+    STEP: 100
+  USERDIST_4:
+    FILENAME: ../configs/user_lens_z.txt
+    MODE: interpolate
+    STEP: 100
+
 COSMOLOGY:
   PARAMETERS:
     H0: 70
     Om0: 0.3
+    
 IMAGE:
   PARAMETERS:
     exposure_time:
       DISTRIBUTION:
-        NAME: delve_exposure_time
+        NAME: des_exposure_time
         PARAMETERS: None
     numPix: 45
     pixel_scale: 0.2636
@@ -30,19 +41,27 @@ IMAGE:
       DISTRIBUTION:
         NAME: des_ccd_gain
         PARAMETERS: None
+        
 SURVEY:
-  PARAMETERS:
-    BANDS: g,r,i,z
-    seeing:
-      DISTRIBUTION:
-        NAME: delve_seeing
-        PARAMETERS: None
-    magnitude_zero_point:
-      DISTRIBUTION:
-        NAME: delve_magnitude_zero_point
-        PARAMETERS: None
-    sky_brightness: 0
-    num_exposures: 1
+    PARAMETERS:
+        BANDS: g,r,z
+        seeing:
+            DISTRIBUTION:
+                NAME: des_seeing
+                PARAMETERS: None
+        magnitude_zero_point:
+            DISTRIBUTION:
+                NAME: des_magnitude_zero_point
+                PARAMETERS: None
+        sky_brightness:
+            DISTRIBUTION:
+                NAME: des_sky_brightness
+                PARAMETERS: None
+        num_exposures:
+            DISTRIBUTION:
+                NAME: des_num_exposures
+                PARAMETERS: None
+    
 SPECIES:
   GALAXY_1:
     NAME: DARKLENS
@@ -104,14 +123,14 @@ SPECIES:
           DISTRIBUTION:
             NAME: uniform
             PARAMETERS:
-              minimum: -1.25
-              maximum: 1.25
+              minimum: -1.0
+              maximum: 1.0
         center_y:
           DISTRIBUTION:
             NAME: uniform
             PARAMETERS:
-              minimum: -1.25
-              maximum: 1.25
+              minimum: -1.0
+              maximum: 1.0
         R_sersic:
           DISTRIBUTION:
             NAME: lognormal
@@ -159,65 +178,11 @@ SPECIES:
               maximum: 0.5
         center_x: 0.0
         center_y: 0.0
-  GALAXY_3:
-    NAME: SIMLENS
-    LIGHT_PROFILE_1:
-      NAME: SERSIC_ELLIPSE
-      PARAMETERS:
-        magnitude: 17
-        center_x: 0.0
-        center_y: 0.0
-        R_sersic:
-          DISTRIBUTION:
-            NAME: normal
-            PARAMETERS:
-              mean: 6.0
-              std: 1.5
-        n_sersic:
-          DISTRIBUTION:
-            NAME: normal
-            PARAMETERS:
-              mean: 4.0
-              std: 0.8
-        e1:
-          DISTRIBUTION:
-            NAME: uniform
-            PARAMETERS:
-              minimum: -0.5
-              maximum: 0.5
-        e2:
-          DISTRIBUTION:
-            NAME: uniform
-            PARAMETERS:
-              minimum: -0.5
-              maximum: 0.5
-    MASS_PROFILE_1:
-      NAME: SIE
-      PARAMETERS:
-        sigma_v:
-          DISTRIBUTION:
-            NAME: uniform
-            PARAMETERS:
-              minimum: 150.0
-              maximum: 450.0
-        e1:
-          DISTRIBUTION:
-            NAME: uniform
-            PARAMETERS:
-              minimum: -0.5
-              maximum: 0.5
-        e2:
-          DISTRIBUTION:
-            NAME: uniform
-            PARAMETERS:
-              minimum: -0.5
-              maximum: 0.5
-        center_x: 0.0
-        center_y: 0.0
+ 
 GEOMETRY:
   CONFIGURATION_1:
     NAME: LENSES
-    FRACTION: 0.5
+    FRACTION: 1.0
     PLANE_1:
       OBJECT_1: DARKLENS
       PARAMETERS:
@@ -229,27 +194,6 @@ GEOMETRY:
               maximum: 0.7499
     PLANE_2:
       OBJECT_1: SOURCE
-      PARAMETERS:
-        REDSHIFT:
-          DISTRIBUTION:
-            NAME: uniform
-            PARAMETERS:
-              minimum: 1.0
-              maximum: 2.0
-  CONFIGURATION_2:
-    NAME: NONLENSES
-    FRACTION: 0.5
-    PLANE_1:
-      OBJECT_1: DARKLENS
-      PARAMETERS:
-        REDSHIFT:
-          DISTRIBUTION:
-            NAME: uniform
-            PARAMETERS:
-              minimum: 0.45
-              maximum: 0.7499
-    PLANE_2:
-      OBJECT_1: DARKLENS
       PARAMETERS:
         REDSHIFT:
           DISTRIBUTION:

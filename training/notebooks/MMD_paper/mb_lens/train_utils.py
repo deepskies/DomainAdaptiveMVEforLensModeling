@@ -267,7 +267,8 @@ def train_loop(source_dataloader,
 
         # Hyperparameter of 1.4 set to weight domain loss vs source loss
         # Perhaps this is where alpha was initially used
-        loss = estimate_loss + domain_loss*1.4
+        da_weight = 1.6 - (0.6 * (epoch / n_epoch))
+        loss = estimate_loss + domain_loss * da_weight
 
         # Backpropagation, update optimizer lr
         loss.backward()
@@ -440,7 +441,6 @@ def generate_isomaps(source_data, target_data, model, n_neighbors = 5, n_compone
     sdata = source_data.reshape([-1, np.prod(source_data.shape[1:])])[:n_points]
     tdata = target_data.reshape([-1, np.prod(target_data.shape[1:])])[:n_points]
     catdata = np.concatenate((sdata, tdata), axis=0)
-    print(catdata.shape)
     isomap = isomap.fit(catdata)
     
     with torch.no_grad():
@@ -547,20 +547,3 @@ def show_isomaps(source_iso,
     plt.show()
 
     return fig0, axes, fig1, ax
-
-
-def loss_bnll(mean, variance, target, beta):  # beta=0.5):
-    """Compute beta-NLL loss
-
-    :param mean: Predicted mean of shape B x D
-    :param variance: Predicted variance of shape B x D
-    :param target: Target of shape B x D
-    :param beta: Parameter from range [0, 1] controlling relative
-        weighting between data points, where `0` corresponds to
-        high weight on low error points and `1` to an equal weighting.
-    :returns: Loss per batch element of shape B
-    """
-    loss = 0.5 * ((target - mean) ** 2 / variance + variance.log())
-    if beta > 0:
-        loss = loss * (variance.detach() ** beta)
-    return loss.sum(axis=-1) / len(mean)
