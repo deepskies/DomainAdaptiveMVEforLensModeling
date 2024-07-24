@@ -2,7 +2,7 @@ DATASET:
   NAME: DELVE_GalGal
   PARAMETERS:
     SIZE: 50000
-    OUTDIR: ./../data/delve_target
+    OUTDIR: ../../data/delve_target_2
     SEED: 1738
     
 BACKGROUNDS:
@@ -61,7 +61,7 @@ SPECIES:
     LIGHT_PROFILE_1:
       NAME: SERSIC_ELLIPSE
       PARAMETERS:
-        magnitude: 1000
+        magnitude: 10000
         center_x: 0.0
         center_y: 0.0
         R_sersic: 6.0
@@ -73,39 +73,25 @@ SPECIES:
       PARAMETERS:
         theta_E:
           DISTRIBUTION:
-            NAME: lognormal
+            NAME: uniform
             PARAMETERS:
-              mean: 0.91629
-              sigma: 0.405465
+              minimum: 0.5
+              maximum: 4
         e1:
           DISTRIBUTION:
             NAME: uniform
             PARAMETERS:
-              minimum: -0.5
-              maximum: 0.5
+              minimum: -0.2
+              maximum: 0.2
         e2:
           DISTRIBUTION:
             NAME: uniform
             PARAMETERS:
-              minimum: -0.5
-              maximum: 0.5
+              minimum: -0.2
+              maximum: 0.2
         center_x: 0.0
         center_y: 0.0
-    SHEAR_PROFILE_1:
-      NAME: SHEAR
-      PARAMETERS:
-        gamma1:
-          DISTRIBUTION:
-            NAME: lognormal
-            PARAMETERS:
-              mean: -3.5065579
-              sigma: 0.621698
-        gamma2:
-          DISTRIBUTION:
-            NAME: lognormal
-            PARAMETERS:
-              mean: -3.5065579
-              sigma: 0.621698
+
   GALAXY_2:
     NAME: SOURCE
     LIGHT_PROFILE_1:

@@ -2,7 +2,7 @@ DATASET:
   NAME: DELVE_GalGal
   PARAMETERS:
     SIZE: 50000
-    OUTDIR: ./../data/delve_source
+    OUTDIR: ../../data/delve_source_2
     SEED: 1738
   
 DISTRIBUTIONS:
@@ -53,10 +53,7 @@ SURVEY:
             DISTRIBUTION:
                 NAME: des_magnitude_zero_point
                 PARAMETERS: None
-        sky_brightness:
-            DISTRIBUTION:
-                NAME: des_sky_brightness
-                PARAMETERS: None
+        sky_brightness: 1000
         num_exposures:
             DISTRIBUTION:
                 NAME: des_num_exposures
@@ -66,53 +63,58 @@ SPECIES:
   GALAXY_1:
     NAME: DARKLENS
     LIGHT_PROFILE_1:
-      NAME: SERSIC_ELLIPSE
-      PARAMETERS:
-        magnitude: 1000
-        center_x: 0.0
-        center_y: 0.0
-        R_sersic: 6.0
-        n_sersic: 4.0
-        e1: -0.5
-        e2: 0.5
+        NAME: SERSIC_ELLIPSE
+        PARAMETERS:
+            magnitude: 1.0
+            center_x: 0
+            center_y: 0
+            R_sersic:
+                DISTRIBUTION:
+                        NAME: uniform
+                        PARAMETERS:
+                            minimum: 1.0
+                            maximum: 2.5
+            n_sersic:
+                DISTRIBUTION:
+                        NAME: uniform
+                        PARAMETERS:
+                            minimum: 2
+                            maximum: 7
+            e1: 
+                DISTRIBUTION:
+                            NAME: uniform
+                            PARAMETERS:
+                                minimum: -0.4
+                                maximum: 0.4
+            e2: 
+                DISTRIBUTION:
+                            NAME: uniform
+                            PARAMETERS:
+                                minimum: -0.4
+                                maximum: 0.4
     MASS_PROFILE_1:
       NAME: SIE
       PARAMETERS:
         theta_E:
           DISTRIBUTION:
-            NAME: lognormal
+            NAME: uniform
             PARAMETERS:
-              mean: 0.91629
-              sigma: 0.405465
+              minimum: 0.5
+              maximum: 4
         e1:
           DISTRIBUTION:
             NAME: uniform
             PARAMETERS:
-              minimum: -0.5
-              maximum: 0.5
+              minimum: -0.2
+              maximum: 0.2
         e2:
           DISTRIBUTION:
             NAME: uniform
             PARAMETERS:
-              minimum: -0.5
-              maximum: 0.5
+              minimum: -0.2
+              maximum: 0.2
         center_x: 0.0
         center_y: 0.0
-    SHEAR_PROFILE_1:
-      NAME: SHEAR
-      PARAMETERS:
-        gamma1:
-          DISTRIBUTION:
-            NAME: lognormal
-            PARAMETERS:
-              mean: -3.5065579
-              sigma: 0.621698
-        gamma2:
-          DISTRIBUTION:
-            NAME: lognormal
-            PARAMETERS:
-              mean: -3.5065579
-              sigma: 0.621698
   GALAXY_2:
     NAME: SOURCE
     LIGHT_PROFILE_1:
