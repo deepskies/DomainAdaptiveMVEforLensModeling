@@ -1,9 +1,9 @@
 DATASET:
   NAME: DELVE_GalGal
   PARAMETERS:
-    SIZE: 50000
-    OUTDIR: ../../data/delve_source_2
-    SEED: 1738
+    SIZE: 100000
+    OUTDIR: ../../data/delve_source_3
+    SEED: 13
   
 DISTRIBUTIONS:
   USERDIST_1:
@@ -49,11 +49,8 @@ SURVEY:
             DISTRIBUTION:
                 NAME: des_seeing
                 PARAMETERS: None
-        magnitude_zero_point:
-            DISTRIBUTION:
-                NAME: des_magnitude_zero_point
-                PARAMETERS: None
-        sky_brightness: 1000
+        magnitude_zero_point: 32.0
+        sky_brightness: 5000000
         num_exposures:
             DISTRIBUTION:
                 NAME: des_num_exposures
@@ -66,20 +63,19 @@ SPECIES:
         NAME: SERSIC_ELLIPSE
         PARAMETERS:
             magnitude: 1.0
-            center_x: 0
-            center_y: 0
+            center_x: 0.0
             R_sersic:
                 DISTRIBUTION:
                         NAME: uniform
                         PARAMETERS:
                             minimum: 1.0
-                            maximum: 2.5
+                            maximum: 4.0
             n_sersic:
                 DISTRIBUTION:
                         NAME: uniform
                         PARAMETERS:
-                            minimum: 2
-                            maximum: 7
+                            minimum: 0.5
+                            maximum: 6.0
             e1: 
                 DISTRIBUTION:
                             NAME: uniform
@@ -99,8 +95,8 @@ SPECIES:
           DISTRIBUTION:
             NAME: uniform
             PARAMETERS:
-              minimum: 0.5
-              maximum: 4
+              minimum: 1
+              maximum: 4.0
         e1:
           DISTRIBUTION:
             NAME: uniform
@@ -120,7 +116,7 @@ SPECIES:
     LIGHT_PROFILE_1:
       NAME: SERSIC_ELLIPSE
       PARAMETERS:
-        magnitude: 17
+        magnitude: 17.0
         center_x:
           DISTRIBUTION:
             NAME: uniform

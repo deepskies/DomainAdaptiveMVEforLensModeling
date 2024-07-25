@@ -1,9 +1,9 @@
 DATASET:
   NAME: DELVE_GalGal
   PARAMETERS:
-    SIZE: 50000
-    OUTDIR: ../../data/delve_target_2
-    SEED: 1738
+    SIZE: 100000
+    OUTDIR: ../../data/delve_target_3
+    SEED: 13
     
 BACKGROUNDS:
   PATH: ../backgrounds
@@ -75,7 +75,7 @@ SPECIES:
           DISTRIBUTION:
             NAME: uniform
             PARAMETERS:
-              minimum: 0.5
+              minimum: 1.0
               maximum: 4
         e1:
           DISTRIBUTION:
