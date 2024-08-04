@@ -1,7 +1,6 @@
 ## Domain Adaptation and Uncertainty Quantification for Gravitational Lens Modeling
-You can select your license from the [choose a license page.](https://choosealicense.com/licenses/), and then change the name of the license in the badge and link included. 
 
-[![status](https://img.shields.io/badge/License-MIT-lightgrey)]
+![status](https://img.shields.io/badge/License-MIT-lightgrey)
 
 This project combines the emerging field of Domain Adaptation with Uncertainty Quantification, working towards applying machine learning to real scientific datasets with limited labelled data. For this project, simulated images of strong gravitational lenses are used as source and target dataset, and the Einstein radius $\theta_E$ and its uncertainty $\Delta \theta_E$ are determined through regression. 
 
@@ -25,7 +24,8 @@ into any directory. No further setup is required once environments are installed
 This works on linux, but has not been tested for mac, windows.
 Install the environments in `envs/` using conda with the following command:
 
-> conda env create -f training_env.yml
+> conda env create -f training_env.yml.
+  
 > conda env create -f deeplenstronomy_env.yml
 
 The `training_env.yml` is required for training the Pytorch model, and `deeplenstronomy_env.yml` for simulating strong lensing datasets using `deeplenstronomy`.
@@ -52,7 +52,6 @@ Once that is generated, you can navigate to `src/training/MVE/MVE_SL_DA_v1.ipynb
     number = {X}, 
     pages = {XX--XX}
 }
-
 ```
 
 ### Acknowledgement 

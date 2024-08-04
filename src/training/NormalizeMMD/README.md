@@ -1,0 +1,1 @@
+These notebooks are identical to the FiducialMMD/ notebooks. However, the dataset is replaced with normalized data, using either a log1p() and RobustScaler combo, or MinMaxScaler. None of the normalizations perform better than the Fiducial data, contrary to expectations that ML models generally perform better with O(1) data and labels.
