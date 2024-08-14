@@ -46,3 +46,7 @@ venv.bak/
 
 # Heavy files
 *.fits
+metadata_lens.csv
+
+# Cloned repos
+deeplenstronomy/
