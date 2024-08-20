@@ -46,7 +46,7 @@ venv.bak/
 
 # Heavy files
 *.fits
-metadata_lens.csv
+*.csv
 *.png
 
 # Cloned repos

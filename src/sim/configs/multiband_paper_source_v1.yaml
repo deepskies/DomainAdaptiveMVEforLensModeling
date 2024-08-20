@@ -2,15 +2,12 @@ DATASET:
     NAME: LensData # set a name, this value is only used if you request the h5 file format
     PARAMETERS:
         SIZE: 100 # number of images in the full datase.
-        OUTDIR: ../../data/mb_paper_nonoise_source
+        OUTDIR: ../../data/mb_paper_source_v1
         SEED: 10 
 
 DISTRIBUTIONS:
     USERDIST_1:
-        FILENAME: ../configs/lens_colors.txt
-        MODE: sample
-    USERDIST_2:
-        FILENAME: ../configs/source_colors_with_zlens.txt
+        FILENAME: ../configs/source_lens_colors.txt
         MODE: sample
 
 COSMOLOGY:
@@ -32,7 +29,7 @@ SURVEY:
         BANDS: g,r,z
         seeing: 0.9
         magnitude_zero_point: 26.58
-        sky_brightness: 1000
+        sky_brightness: 10000000000.0
         num_exposures: 10
 
 SPECIES:
