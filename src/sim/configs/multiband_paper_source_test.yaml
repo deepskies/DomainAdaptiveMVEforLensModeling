@@ -1,8 +1,8 @@
 DATASET:
     NAME: LensData # set a name, this value is only used if you request the h5 file format
     PARAMETERS:
-        SIZE: 100000 # number of images in the full datase.
-        OUTDIR: ../../data/mb_paper_source_final
+        SIZE: 100 # number of images in the full datase.
+        OUTDIR: ../../data/mb_paper_source_test
         SEED: 10 
 
 DISTRIBUTIONS:
