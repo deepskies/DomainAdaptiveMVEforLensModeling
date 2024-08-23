@@ -1,0 +1,94 @@
+DATASET:
+    NAME: LensData # set a name, this value is only used if you request the h5 file format
+    PARAMETERS:
+        SIZE: 100 # number of images in the full datase.
+        OUTDIR: ../../data/mb_paper_source_final_eg
+        SEED: 10 
+
+DISTRIBUTIONS:
+    USERDIST_1:
+        FILENAME: ../configs/source_lens_colors_eg.txt
+        MODE: sample
+
+COSMOLOGY:
+    PARAMETERS:
+        H0: 70
+        Om0: 0.3
+
+IMAGE:
+    PARAMETERS:
+        exposure_time: 1000
+        numPix: 40
+        pixel_scale: 0.263
+        psf_type: 'GAUSSIAN'
+        read_noise: 0
+        ccd_gain: 6.083
+
+SURVEY:
+    PARAMETERS:
+        BANDS: g,r,z
+        seeing: 0.9
+        magnitude_zero_point: 26.58
+        sky_brightness: 10000000000.0
+        num_exposures: 10
+
+SPECIES:
+    GALAXY_1:
+        NAME: LENS
+        LIGHT_PROFILE_1:
+            NAME: SERSIC_ELLIPSE
+            PARAMETERS:
+                magnitude: 1000.0
+                center_x: 0
+                center_y: 0
+                R_sersic: 2.152903
+                n_sersic: 4.108577
+                e1: 0.151256
+                e2: -0.046711
+
+        MASS_PROFILE_1:
+            NAME: SIE
+            PARAMETERS:
+                theta_E: 2.481703
+                e1: 0.185233
+                e2: -0.176422
+                center_x: 0.0
+                center_y: 0.0
+        SHEAR_PROFILE_1:
+            NAME: SHEAR
+            PARAMETERS:
+                gamma1: -0.01
+                gamma2: 0.04
+    GALAXY_2:
+        NAME: SOURCE
+        LIGHT_PROFILE_1:
+            NAME: SERSIC_ELLIPSE
+            PARAMETERS:
+                magnitude: 1.0
+                center_x: -0.44
+                center_y: 0.04
+                R_sersic: 0.6
+                n_sersic: 2.4
+                e1: 0.15
+                e2: -0.05
+        MASS_PROFILE_1:
+            NAME: SIE
+            PARAMETERS:
+                theta_E: 2.0
+                e1: 0.1
+                e2: -0.1
+                center_x: 0.0
+                center_y: 0.0
+
+GEOMETRY:
+    CONFIGURATION_1:
+        NAME: LENSES
+        FRACTION: 1.0
+        PLANE_1:
+            OBJECT_1: LENS
+            PARAMETERS:
+                REDSHIFT: 0.5
+        PLANE_2:
+            OBJECT_1: SOURCE
+            PARAMETERS:
+                REDSHIFT: 2.
