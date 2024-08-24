@@ -53,3 +53,34 @@ v8:
     batch size = 128
     lr = 3e-5 (200 ep), step 3e-6 (50 ep)
     seed = 13
+
+v9:
+    DA Weight = 1.4
+    beta = 1 -> 0.7 (50 ep), 0.7 (150 ep)
+    batch size = 128
+    init_lr = 3e-5 (0.1x every 50 ep)
+    seed = 13
+
+v10:
+    DA Weight = 1.4
+    beta = 1 -> 0.6 (50 ep), 0.6 (150 ep)
+    batch size = 128
+    init_lr = 3e-5 (0.1x every 50 ep)
+    seed = 13
+
+v11:
+    DA Weight = 1.4
+    beta = 1 -> 0.7 (50 ep), 0.7 (150 ep)
+    batch size = 128
+    optimizer = Adadelta
+    init_lr = default
+    seed = 13
+
+v11:
+    DA Weight = 1.4
+    beta = 1 -> 0.7 (50 ep), 0.7 (150 ep)
+    batch size = 128
+    optimizer = AdamW
+    init_lr = 3e-5
+    weight_decay = default
+    seed = 13
