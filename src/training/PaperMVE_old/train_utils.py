@@ -591,8 +591,6 @@ def test_loop_mve(source_dataloader,
         estimator_error_target = 0
         mve_error = 0
         mve_error_target = 0
-        nll_error = 0
-        nll_error_target = 0
         score_list = np.array([])
         score_list_target = np.array([])
 
@@ -615,7 +613,6 @@ def test_loop_mve(source_dataloader,
             
             estimate_loss = regressor_loss_fn(source_mean, y)
             mve_loss = loss_bnll(source_mean.flatten(), source_variance.flatten(), y, beta = beta_val)
-            nll_loss = loss_bnll(source_mean.flatten(), source_variance.flatten(), y, beta = 0.0)
 
             # Target Testing
 
@@ -633,7 +630,6 @@ def test_loop_mve(source_dataloader,
             
             estimate_loss_target = regressor_loss_fn(target_mean, y_target)
             mve_loss_target = loss_bnll(target_mean.flatten(), target_variance.flatten(), y_target, beta = beta_val)
-            nll_loss_target = loss_bnll(target_mean.flatten(), target_variance.flatten(), y_target, beta = 0.0)
             
             # Update values
 
@@ -644,10 +640,6 @@ def test_loop_mve(source_dataloader,
             # MVE loss on validation testing
             mve_error += mve_loss.item()
             mve_error_target += mve_loss_target.item()
-
-            # NLL loss on validation testing
-            nll_error += nll_loss.item()
-            nll_error_target += nll_loss_target.item()
 
             # R2 Scores on validation testing
             score = r2_score(y.cpu(), source_mean.cpu())
@@ -663,10 +655,8 @@ def test_loop_mve(source_dataloader,
         estimator_error_target /= len_dataloader
         mve_error /= len_dataloader
         mve_error_target /= len_dataloader
-        nll_error /= len_dataloader
-        nll_error_target /= len_dataloader
         
-    return [estimator_error, estimator_error_target, score, score_target, mve_error, mve_error_target, nll_error, nll_error_target]
+    return [estimator_error, estimator_error_target, score, score_target, mve_error, mve_error_target]
 
 def initialize_state(mod_name, model, optimizer):
     stats = {'train_DA_loss':[],
@@ -679,15 +669,12 @@ def initialize_state(mod_name, model, optimizer):
                  'val_target_r2_score':[],
                  'val_source_mve_loss': [],
                  'val_target_mve_loss': [],
-                 'val_source_nll_loss': [],
-                 'val_target_nll_loss': [],
                  'da_weight': [],
                  'beta': [],
                 'epoch_no': 0}
 
     best_target_R2 = -1.0
     best_mve_loss = 1e6
-    best_nll_loss = 1e6
     
     if mod_name is not None:
         state = torch.load(mod_name)
@@ -700,9 +687,8 @@ def initialize_state(mod_name, model, optimizer):
 
         best_target_R2 = max(stats['val_target_r2_score'])
         best_mve_loss = min(stats['val_target_mve_loss'])
-        best_nll_loss = min(stats['val_target_nll_loss'])
     
-    return stats, model, optimizer, best_target_R2, best_mve_loss, best_nll_loss
+    return stats, model, optimizer, best_target_R2, best_mve_loss
 
 
 def save_model(mod_name, model, optimizer, stats):
