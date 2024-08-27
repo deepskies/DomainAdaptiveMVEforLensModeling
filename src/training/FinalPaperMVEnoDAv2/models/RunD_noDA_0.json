@@ -1,0 +1,1 @@
+{"train_DA_loss": [], "train_regression_loss": [], "train_mve_loss": [], "train_r2_score": [], "val_source_regression_loss": [], "val_target_regression_loss": [], "val_source_r2_score": [], "val_target_r2_score": [], "val_source_mve_loss": [], "val_target_mve_loss": [], "val_source_nll_loss": [], "val_target_nll_loss": [], "da_weight": [], "beta": [], "epoch_no": 0}

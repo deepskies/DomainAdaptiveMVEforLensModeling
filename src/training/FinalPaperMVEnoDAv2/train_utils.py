@@ -524,14 +524,14 @@ def train_loop_mve(source_dataloader,
         _, domain_output_target = model(X_target)
 
         # Calculate the DA Loss between source and target, MMD loss
-        domain_loss = da_loss(domain_output_source, domain_output_target)
+        with torch.no_grad():
+            domain_loss = da_loss(domain_output_source, domain_output_target)
+            score = r2_score(y.cpu().detach().numpy(), mean.cpu().detach().numpy())
+            
         mve_loss = loss_bnll(mean.flatten(), variance.flatten(), y, beta = beta_val)
         
-        # Calculate the R2 score of the predictions vs. labels
-        score = r2_score(y.cpu().detach().numpy(), mean.cpu().detach().numpy())
-
         # Loss is combination of mve and domain loss, weighted by da_weight
-        loss = mve_loss + domain_loss * da_weight 
+        loss = mve_loss #+ domain_loss * da_weight 
 
         
         # Backpropagation, update optimizer lr
