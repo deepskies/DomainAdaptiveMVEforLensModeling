@@ -47,8 +47,10 @@ venv.bak/
 # Heavy files
 *.fits
 *.csv
-*.png
-
+*isomap.png
+*da.png
+*DA.png
+!figures/
 # Cloned repos
 deeplenstronomy/
 
