@@ -2,6 +2,8 @@
 
 ![status](https://img.shields.io/badge/License-MIT-lightgrey)
 
+#### By: Shrihan Agarwal
+
 This project combines the emerging field of Domain Adaptation with Uncertainty Quantification, working towards applying machine learning to real scientific datasets with limited labelled data. For this project, simulated images of strong gravitational lenses are used as source and target dataset, and the Einstein radius $\theta_E$ and its uncertainty $\Delta \theta_E$ are determined through regression. 
 
 Applying machine learning in science domains such as astronomy is difficult. With models trained on simulated data being applied to real data, models frequently underperform - simulations cannot perfectlty capture the true complexity of real data. Enter domain adaptation (DA). The DA techniques used in this work use Maximum Mean Discrepancy (MMD) Loss to train a network to being embeddings of labelled "source" data gravitational lenses in line with unlabeled "target" gravitational lenses. With source and target datasets made similar, training on source datasets can be used with greater fidelity on target datasets.
