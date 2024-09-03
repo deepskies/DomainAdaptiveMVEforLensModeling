@@ -28,18 +28,54 @@ Clone the package using:
 
 > git clone https://github.com/deepskies/AdaptiveMVEforLensModeling
 
-into any directory. No further setup is required once environments are installed.
+into any directory. Then, install the environments.
 
 #### Environments
 
 This works on linux, but has not been tested for mac, windows.
-Install the environments in `envs/` using conda with the following command:
+We recommend using conda. Install the environments in `envs/` using conda with the following command:
 
 > conda env create -f training_env.yml.
   
 > conda env create -f deeplenstronomy_env.yml
 
 The `training_env.yml` is required for training the Pytorch model, and `deeplenstronomy_env.yml` for simulating strong lensing datasets using `deeplenstronomy`. Note that there is a sky brightness-related bug in the PyPI 0.0.2.3 version of deeplenstronomy, and an update to the latest version will be required for reproduction of results.
+
+
+### Repository Structure
+
+AdaptiveMVEforLensModeling/
+│
+├── src/
+│   ├── sim/
+│   │   └── # Contains all information required to generate the dataset
+│   │
+│   ├── data/
+│   │   └── # Data should be stored here after download or generation
+│   │
+│   └── training/
+│       ├── MVEonly/
+│       │   ├── paper_models/
+│       │   │   └── # Final PyTorch models used in the MVEonly model, along with training information
+│       │   │
+│       │   └── # Notebooks and code specific to the MVEonly model
+│       │
+│       ├── MVEUDA/
+│       │   ├── paper_models/
+│       │   │   └── # Final PyTorch models used in the MVEUDA model, along with training information
+│       │   │
+│       │   ├── figures/
+│       │   │   └── # Figures generated for the paper
+│       │   │
+│       │   └── ModelVizPaper.ipynb
+│       │       └── # Notebook used to generate figures in MVEUDA/figures/ and used in the paper
+│       │
+│       └── # Other notebooks and resources related to training
+│
+├── envs/
+│   └── # Environment specific files
+│
+└── # Additional files and directories as needed
 
 
 ### Quickstart
