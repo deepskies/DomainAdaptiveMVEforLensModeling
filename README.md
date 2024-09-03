@@ -43,39 +43,49 @@ The `training_env.yml` is required for training the Pytorch model, and `deeplens
 
 
 ### Repository Structure
+
+The repository structure is below. 
+
 ```
 AdaptiveMVEforLensModeling/
 │
 ├── src/
 │   ├── sim/
-│   │   └── # Contains all information required to generate the dataset
+│   │   ├── configs/
+│   │   │   └── deeplenstronomy config files to generate the data
+│   │   │
+│   │   └── notebooks/
+│   │       └── gen_sim.ipynb: used to generate the data in data/.
+│   │   
 │   │
 │   ├── data/
-│   │   └── # Data should be stored here after download or generation
+│   │   └── Data should be stored here after download or generation.
 │   │
 │   └── training/
 │       ├── MVEonly/
 │       │   ├── paper_models/
-│       │   │   └── # Final PyTorch models used in the MVEonly model, along with training information
+│       │   │   └── Final PyTorch models in the MVEonly model + training information.
 │       │   │
-│       │   └── # Notebooks and code specific to the MVEonly model
+│       │   └── RunA.ipynb
+│       │       └── Notebook(s) with different seeds required to run the MVEonly model.
 │       │
-│       ├── MVEUDA/
-│       │   ├── paper_models/
-│       │   │   └── # Final PyTorch models used in the MVEUDA model, along with training information
-│       │   │
-│       │   ├── figures/
-│       │   │   └── # Figures generated for the paper
-│       │   │
-│       │   └── ModelVizPaper.ipynb
-│       │       └── # Notebook used to generate figures in MVEUDA/figures/ and used in the paper
-│       │
-│       └── # Other notebooks and resources related to training
+│       └── MVEUDA/
+│           ├── paper_models/
+│           │   └── Final PyTorch models in the MVEonly model + training information.
+│           │
+│           ├── figures/
+│           │   └── All figures in the paper are drawn from here.
+│           | 
+│           ├── RunA.ipynb
+│           │   └── Notebook(s) with different seeds required to run the MVE-UDA model.
+│           │
+│           └── ModelVizPaper.ipynb
+│               └── Notebook used to generate figures in figures/ from data in paper_models/
 │
-├── envs/
-│   └── # Environment specific files
-│
-└── # Additional files and directories as needed
+└── envs/
+    └── Conda environment specification files
+
+[ASCII formatting generated using ChatGPT]
 ```
 
 ### Quickstart
