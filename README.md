@@ -43,7 +43,7 @@ The `training_env.yml` is required for training the Pytorch model, and `deeplens
 
 
 ### Repository Structure
-
+```
 AdaptiveMVEforLensModeling/
 │
 ├── src/
@@ -76,7 +76,7 @@ AdaptiveMVEforLensModeling/
 │   └── # Environment specific files
 │
 └── # Additional files and directories as needed
-
+```
 
 ### Quickstart
 
