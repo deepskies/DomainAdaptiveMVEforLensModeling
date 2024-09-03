@@ -37,6 +37,8 @@ In order to reproduce results, you will first need to generate the datasets. Nav
 
 Once that is generated, you can navigate to `src/training/MVEonly/MVE_noDA_RunA.ipynb` (or Run B, C, D, E) for MVE-only training and `src/training/MVEonly/MVE_RunA.ipynb` (or Run B, C, D, E) for MVE-UDA training. The path to the simulated data may require to be updated in the repository. You will need the `neural` environment to do so.
 
+To generate the results in the paper, the notebook `src/training/MVEUDA/ModelVizPaper.ipynb` was used. Final figure results in the paper are stored in `src/training/MVEUDA/figures/`. Saved PyTorch models of the runs are provided in `src/training/MVEUDA/paper_models/` and `src/training/MVEonly/paper_models/`. New runs by a user will be stored in the adjacent `models/` directories.
+
 
 ### Citation 
 
