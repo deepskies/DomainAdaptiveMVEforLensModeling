@@ -33,7 +33,7 @@ The `training_env.yml` is required for training the Pytorch model, and `deeplens
 
 ### Quickstart
 
-In order to reproduce results, you will first need to generate the datasets. Navigate to `src/sim/notebooks` and generate a source target dataset pair in the `src/data` directory. The config files to generate these datasets are specified in `src/sim/config` using `gen_sim.ipynb`. You will need to use the `deeplens` environment to do so. 
+In order to reproduce results, you will first need to generate or download the datasets. To generate them, navigate to `src/sim/notebooks` and generate a source target dataset pair in the `src/data` directory. The config files to generate these datasets are specified in `src/sim/config` using `gen_sim.ipynb`. You will need to use the `deeplens` environment to do so. Alternatively, you can download the data from zenodo here: . Place the folders `mb_paper_source_final` and `mb_paper_target_final` into the `src/sim/data` directory and continue to the next step.
 
 Once that is generated, you can navigate to `src/training/MVEonly/MVE_noDA_RunA.ipynb` (or Run B, C, D, E) for MVE-only training and `src/training/MVEonly/MVE_RunA.ipynb` (or Run B, C, D, E) for MVE-UDA training. The path to the simulated data may require to be updated in the repository. You will need the `neural` environment to do so.
 
