@@ -4,7 +4,7 @@
 
 This project combines the emerging field of Domain Adaptation with Uncertainty Quantification, working towards applying machine learning to real scientific datasets with limited labelled data. For this project, simulated images of strong gravitational lenses are used as source and target dataset, and the Einstein radius $\theta_E$ and its uncertainty $\Delta \theta_E$ are determined through regression. 
 
-Applying machine learning in science domains such as astronomy is difficult. With models trained on simulated data being applied to real data, models frequently underperform - simulations cannot perfectlty capture the true complexity of real data. Enter domain adaptation (DA). The DA techniques used in this work use Maximum Mean Discrepancy Loss to train a network to being embeddings of labelled "source" data gravitational lenses in line with unlabeled "target" gravitational lenses. With source and target datasets made similar, training on source datasets can be used with greater fidelity on target datasets.
+Applying machine learning in science domains such as astronomy is difficult. With models trained on simulated data being applied to real data, models frequently underperform - simulations cannot perfectlty capture the true complexity of real data. Enter domain adaptation (DA). The DA techniques used in this work use Maximum Mean Discrepancy (MMD) Loss to train a network to being embeddings of labelled "source" data gravitational lenses in line with unlabeled "target" gravitational lenses. With source and target datasets made similar, training on source datasets can be used with greater fidelity on target datasets.
 
 Scientific analysis requires an estimate of uncertainty on measurements. We adopt an approach known as mean-variance estimation, which seeks to estimate the variance and control regression by minimizing the beta negative log-likelihood loss. To our knowledge, this is the first time that domain adaptation and uncertainty quantification are being combined, especially for regression on an astrophysical dataset.
 
@@ -28,14 +28,14 @@ Install the environments in `envs/` using conda with the following command:
   
 > conda env create -f deeplenstronomy_env.yml
 
-The `training_env.yml` is required for training the Pytorch model, and `deeplenstronomy_env.yml` for simulating strong lensing datasets using `deeplenstronomy`.
+The `training_env.yml` is required for training the Pytorch model, and `deeplenstronomy_env.yml` for simulating strong lensing datasets using `deeplenstronomy`. Note that there is a sky brightness-related bug in the PyPI 0.0.2.3 version of deeplenstronomy, and an update to the latest version will be required for reproduction of results.
 
 
 ### Quickstart
 
-In order to reproduce results, you will first need to generate the datasets. Navigate to `src/sim/notebooks` and generate a source target dataset pair as specified in `src/sim/config`. You will need to use the `deeplens` environment to do so.
+In order to reproduce results, you will first need to generate the datasets. Navigate to `src/sim/notebooks` and generate a source target dataset pair in the `src/data` directory. The config files to generate these datasets are specified in `src/sim/config` using `gen_sim.ipynb`. You will need to use the `deeplens` environment to do so. 
 
-Once that is generated, you can navigate to `src/training/MVE/MVE_SL_DA_v1.ipynb` and run the training after updating the path to the data in the file. You will need the `neural` environment to do so.
+Once that is generated, you can navigate to `src/training/MVEonly/MVE_noDA_RunA.ipynb` (or Run B, C, D, E) for MVE-only training and `src/training/MVEonly/MVE_RunA.ipynb` (or Run B, C, D, E) for MVE-UDA training. The path to the simulated data may require to be updated in the repository. You will need the `neural` environment to do so.
 
 
 ### Citation 
@@ -55,4 +55,4 @@ Once that is generated, you can navigate to `src/training/MVE/MVE_SL_DA_v1.ipynb
 ```
 
 ### Acknowledgement 
-Include any acknowledgements for research groups, important collaborators not listed as a contributor, institutions, etc. 
+This project is a part of the DeepSkies group, with advisors Alex Ciprijanovic and Brian Nord. We greatly appreciate advice and contributions from Jason Poh, Paxson Swierc, Megan Zhao and Becky Nevin -- this work would be impossible without building on their earlier discoveries. We used the Fermilab Elastic Analysis Facility (EAF) for computational and storage purposes in this project. Additionally, this project has used data from both the Dark Energy Survey and Dark Energy CAM Legacy Survey DR10 to generate realistic data - we thank the collaborations for making their catalogs accessible.
