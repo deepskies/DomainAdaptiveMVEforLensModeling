@@ -15,7 +15,7 @@ Scientific analysis requires an estimate of uncertainty on measurements. We adop
 
 Clone the package using:
 
-> git clone https://github.com/deepskies/DAUQ_LensModeling
+> git clone https://github.com/deepskies/AdaptiveMVEforLensModeling
 
 into any directory. No further setup is required once environments are installed.
 
