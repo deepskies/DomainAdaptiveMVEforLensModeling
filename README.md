@@ -14,9 +14,9 @@ Scientific analysis requires an estimate of uncertainty on measurements. We adop
 
 Domain Adaptation aligns an unlabelled "target" dataset with a labelled "source" dataset, so that predictions can be performed on both with accuracy. For this project, both source and target datasets are generated using ```deeplenstronomy```. Below we show a single 3-band image simulated using the source and target datasets, as a comparison.
 
-![plot](../src/training/MVEUDA/figures/source_example.png)
+![plot](./src/training/MVEUDA/figures/source_example.png)
 
-![plot](../src/training/MVEUDA/figures/target_example.png)
+![plot](./src/training/MVEUDA/figures/target_example.png)
 
 The datasets with these images, as well as the training labels, can be downloaded from zenodo: https://zenodo.org/records/13647416.
 
