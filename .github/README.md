@@ -118,7 +118,8 @@ AdaptiveMVEforLensModeling/
     * Adjust filepaths to the dataset if necessary.
     * Activate the `neural` conda environment.
     * Run training by running the notebook.
-
+    * New runs by a user will be stored in the adjacent `models/` directories.
+    
 * __MVE-UDA__
     * Follows an identical procedure to above, in `src/training/MVEUDA/`.
 
@@ -127,7 +128,7 @@ AdaptiveMVEforLensModeling/
 * To generate the results in the paper use the notebook `src/training/MVEUDA/ModelVizPaper.ipynb`.
     * Final figures from this notebook are stored in `src/training/MVEUDA/figures/`. 
     * Saved PyTorch models of the runs are provided in `src/training/MVE*/paper_models/`.
-    * New runs by a user will be stored in the adjacent `models/` directories.
+
 
 <br>
   
