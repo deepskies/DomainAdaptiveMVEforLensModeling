@@ -2,20 +2,17 @@
 
 ![status](https://img.shields.io/badge/License-MIT-lightgrey)
 
-#### By: Shrihan Agarwal
+![plot](./src/training/MVEUDA/figures/isomap_final.png)
 
-<table>
-  <tr>
-    <td><img src="./src/training/MVEUDA/figures/residual.png" alt="Residual Plot" style="width: 45%;"/></td>
-    <td><img src="./src/training/MVEUDA/figures/resid_legend.png" alt="Residual Legend" style="width: 45%;"/></td>
-  </tr>
-</table>!
-
+---
 This project combines the emerging field of Domain Adaptation with Uncertainty Quantification, working towards applying machine learning to real scientific datasets with limited labelled data. For this project, simulated images of strong gravitational lenses are used as source and target dataset, and the Einstein radius $\theta_E$ and its aleatoric uncertainty $\sigma_\textrm{al}$ are determined through regression. 
 
 Applying machine learning in science domains such as astronomy is difficult. With models trained on simulated data being applied to real data, models frequently underperform - simulations cannot perfectlty capture the true complexity of real data. Enter domain adaptation (DA). The DA techniques used in this work use Maximum Mean Discrepancy (MMD) Loss to train a network to being embeddings of labelled "source" data gravitational lenses in line with unlabeled "target" gravitational lenses. With source and target datasets made similar, training on source datasets can be used with greater fidelity on target datasets.
 
 Scientific analysis requires an estimate of uncertainty on measurements. We adopt an approach known as mean-variance estimation, which seeks to estimate the variance and control regression by minimizing the beta negative log-likelihood loss. To our knowledge, this is the first time that domain adaptation and uncertainty quantification are being combined, especially for regression on an astrophysical dataset.
+
+#### Coded By: [Shrihan Agarwal](https://github.com/ShrihanSolo)
+---
 
 ### Datasets
 
@@ -26,6 +23,8 @@ Domain Adaptation aligns an unlabelled "target" dataset with a labelled "source"
 ![plot](./src/training/MVEUDA/figures/target_example.png)
 
 The datasets with these images, as well as the training labels, can be downloaded from zenodo: https://zenodo.org/records/13647416.
+
+---
 
 ### Installation 
 
@@ -48,6 +47,7 @@ We recommend using conda. Install the environments in `envs/` using conda with t
 
 The `training_env.yml` is required for training the Pytorch model, and `deeplenstronomy_env.yml` for simulating strong lensing datasets using `deeplenstronomy`. Note that there is a sky brightness-related bug in the PyPI 0.0.2.3 version of deeplenstronomy, and an update to the latest version will be required for reproduction of results.
 
+---
 
 ### Repository Structure
 
@@ -94,6 +94,7 @@ AdaptiveMVEforLensModeling/
 
 [ASCII formatting generated using ChatGPT]
 ```
+---
 
 ### Reproduction
 
@@ -127,6 +128,16 @@ AdaptiveMVEforLensModeling/
     * Final figures from this notebook are stored in `src/training/MVEUDA/figures/`. 
     * Saved PyTorch models of the runs are provided in `src/training/MVE*/paper_models/`.
     * New runs by a user will be stored in the adjacent `models/` directories.
+
+<br>
+<br>
+  
+<div style="display: flex; justify-content: space-between;">
+  <img src="./src/training/MVEUDA/figures/residual.png" alt="Residual Plot" style="width: 70%;"/>
+  <img src="./src/training/MVEUDA/figures/resid_legend.png" alt="Residual Legend" style="width: 25%;"/>
+</div>
+
+---
 
 ### Citation 
 
