@@ -100,26 +100,26 @@ AdaptiveMVEforLensModeling/
 
 #### Acquiring The Dataset
 
-* Option A: Generate the Dataset
+* __Option A: Generate the Dataset__
     * Navigate to `src/sim/notebooks/`.
     * Generate a source/target data pair in the `src/data/` directory:
         * Run `gen_sim.py` on `src/sim/config/source_config.yaml` and `target_config.yaml`.
     * A source and target data folder should be present in `src/data/`.
   
-* Option B: Download the Dataset
+* __Option B: Download the Dataset__
     * Zip files of the dataset are available at https://zenodo.org/records/13647416.
     * The source and target data downloaded should be added to the `src/data/` directory.
         * Place the folders `mb_paper_source_final` and `mb_paper_target_final` into the `src/data/` directory.
 
 #### Running Training
 
-* MVE-Only
+* __MVE-Only__
     * Navigate to `src/training/MVEonly/MVE_noDA_RunA.ipynb` (or Run B, C, D, E)
     * Adjust filepaths to the dataset if necessary.
     * Activate the `neural` conda environment.
     * Run training by running the notebook.
 
-* MVE-UDA
+* __MVE-UDA__
     * Follows an identical procedure to above, in `src/training/MVEUDA/`.
 
 #### Visualizing Paper Results
@@ -129,7 +129,6 @@ AdaptiveMVEforLensModeling/
     * Saved PyTorch models of the runs are provided in `src/training/MVE*/paper_models/`.
     * New runs by a user will be stored in the adjacent `models/` directories.
 
-<br>
 <br>
   
 <div style="display: flex; justify-content: space-between;">
