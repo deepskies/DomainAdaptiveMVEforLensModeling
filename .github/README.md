@@ -2,7 +2,7 @@
 
 ![status](https://img.shields.io/badge/License-MIT-lightgrey)
 
-![plot](./src/training/MVEUDA/figures/isomap_final.png)
+![plot](../src/training/MVEUDA/figures/isomap_final.png)
 
 ---
 This project combines the emerging field of Domain Adaptation with Uncertainty Quantification, working towards applying machine learning to real scientific datasets with limited labelled data. For this project, simulated images of strong gravitational lenses are used as source and target dataset, and the Einstein radius $\theta_E$ and its aleatoric uncertainty $\sigma_\textrm{al}$ are determined through regression. 
@@ -18,9 +18,9 @@ Scientific analysis requires an estimate of uncertainty on measurements. We adop
 
 Domain Adaptation aligns an unlabelled "target" dataset with a labelled "source" dataset, so that predictions can be performed on both with accuracy. That target domain has a domain shift that must be aligned. In our case, we add realistic astrophysical survey-like noise to strong lensing images in the target data set, but no noise in the source dataset. For this project, both source and target datasets are generated using ```deeplenstronomy```. Below we show a single 3-band image simulated using the no-noise source dataset and DES-like noise target dataset, as a comparison.
 
-![plot](./src/training/MVEUDA/figures/source_example.png)
+![plot](../src/training/MVEUDA/figures/source_example.png)
 
-![plot](./src/training/MVEUDA/figures/target_example.png)
+![plot](../src/training/MVEUDA/figures/target_example.png)
 
 The datasets with these images, as well as the training labels, can be downloaded from zenodo: https://zenodo.org/records/13647416.
 
@@ -132,8 +132,8 @@ AdaptiveMVEforLensModeling/
 <br>
   
 <div style="display: flex; justify-content: space-between;">
-  <img src="./src/training/MVEUDA/figures/residual.png" alt="Residual Plot" style="width: 70%;"/>
-  <img src="./src/training/MVEUDA/figures/resid_legend.png" alt="Residual Legend" style="width: 25%;"/>
+  <img src="../src/training/MVEUDA/figures/residual.png" alt="Residual Plot" style="width: 70%;"/>
+  <img src="../src/training/MVEUDA/figures/resid_legend.png" alt="Residual Legend" style="width: 25%;"/>
 </div>
 
 ---
