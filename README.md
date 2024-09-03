@@ -4,6 +4,13 @@
 
 #### By: Shrihan Agarwal
 
+<table>
+  <tr>
+    <td><img src="./src/training/MVEUDA/figures/residual.png" alt="Residual Plot" style="width: 45%;"/></td>
+    <td><img src="./src/training/MVEUDA/figures/resid_legend.png" alt="Residual Legend" style="width: 45%;"/></td>
+  </tr>
+</table>!
+
 This project combines the emerging field of Domain Adaptation with Uncertainty Quantification, working towards applying machine learning to real scientific datasets with limited labelled data. For this project, simulated images of strong gravitational lenses are used as source and target dataset, and the Einstein radius $\theta_E$ and its aleatoric uncertainty $\sigma_\textrm{al}$ are determined through regression. 
 
 Applying machine learning in science domains such as astronomy is difficult. With models trained on simulated data being applied to real data, models frequently underperform - simulations cannot perfectlty capture the true complexity of real data. Enter domain adaptation (DA). The DA techniques used in this work use Maximum Mean Discrepancy (MMD) Loss to train a network to being embeddings of labelled "source" data gravitational lenses in line with unlabeled "target" gravitational lenses. With source and target datasets made similar, training on source datasets can be used with greater fidelity on target datasets.
@@ -12,7 +19,7 @@ Scientific analysis requires an estimate of uncertainty on measurements. We adop
 
 ### Datasets
 
-Domain Adaptation aligns an unlabelled "target" dataset with a labelled "source" dataset, so that predictions can be performed on both with accuracy. For this project, both source and target datasets are generated using ```deeplenstronomy```. Below we show a single 3-band image simulated using the source and target datasets, as a comparison.
+Domain Adaptation aligns an unlabelled "target" dataset with a labelled "source" dataset, so that predictions can be performed on both with accuracy. That target domain has a domain shift that must be aligned. In our case, we add realistic astrophysical survey-like noise to strong lensing images in the target data set, but no noise in the source dataset. For this project, both source and target datasets are generated using ```deeplenstronomy```. Below we show a single 3-band image simulated using the no-noise source dataset and DES-like noise target dataset, as a comparison.
 
 ![plot](./src/training/MVEUDA/figures/source_example.png)
 
@@ -80,22 +87,46 @@ AdaptiveMVEforLensModeling/
 │           │   └── Notebook(s) with different seeds required to run the MVE-UDA model.
 │           │
 │           └── ModelVizPaper.ipynb
-│               └── Notebook used to generate figures in figures/ from data in paper_models/
+│               └── Notebook used to generate figures in figures/ from data in paper_models/.
 │
 └── envs/
-    └── Conda environment specification files
+    └── Conda environment specification files.
 
 [ASCII formatting generated using ChatGPT]
 ```
 
-### Quickstart
+### Reproduction
 
-In order to reproduce results, you will first need to generate or download the datasets. To generate them, navigate to `src/sim/notebooks` and generate a source target dataset pair in the `src/data` directory. The config files to generate these datasets are specified in `src/sim/config` using `gen_sim.ipynb`. You will need to use the `deeplens` environment to do so. Alternatively, you can download the data from zenodo here: . Place the folders `mb_paper_source_final` and `mb_paper_target_final` into the `src/sim/data` directory and continue to the next step.
+#### Acquiring The Dataset
 
-Once that is generated, you can navigate to `src/training/MVEonly/MVE_noDA_RunA.ipynb` (or Run B, C, D, E) for MVE-only training and `src/training/MVEonly/MVE_RunA.ipynb` (or Run B, C, D, E) for MVE-UDA training. The path to the simulated data may require to be updated in the repository. You will need the `neural` environment to do so.
+* Option A: Generate the Dataset
+    * Navigate to `src/sim/notebooks/`.
+    * Generate a source/target data pair in the `src/data/` directory:
+        * Run `gen_sim.py` on `src/sim/config/source_config.yaml` and `target_config.yaml`.
+    * A source and target data folder should be present in `src/data/`.
+  
+* Option B: Download the Dataset
+    * Zip files of the dataset are available at https://zenodo.org/records/13647416.
+    * The source and target data downloaded should be added to the `src/data/` directory.
+        * Place the folders `mb_paper_source_final` and `mb_paper_target_final` into the `src/data/` directory.
 
-To generate the results in the paper, the notebook `src/training/MVEUDA/ModelVizPaper.ipynb` was used. Final figure results in the paper are stored in `src/training/MVEUDA/figures/`. Saved PyTorch models of the runs are provided in `src/training/MVEUDA/paper_models/` and `src/training/MVEonly/paper_models/`. New runs by a user will be stored in the adjacent `models/` directories.
+#### Running Training
 
+* MVE-Only
+    * Navigate to `src/training/MVEonly/MVE_noDA_RunA.ipynb` (or Run B, C, D, E)
+    * Adjust filepaths to the dataset if necessary.
+    * Activate the `neural` conda environment.
+    * Run training by running the notebook.
+
+* MVE-UDA
+    * Follows an identical procedure to above, in `src/training/MVEUDA/`.
+
+#### Visualizing Paper Results
+
+* To generate the results in the paper use the notebook `src/training/MVEUDA/ModelVizPaper.ipynb`.
+    * Final figures from this notebook are stored in `src/training/MVEUDA/figures/`. 
+    * Saved PyTorch models of the runs are provided in `src/training/MVE*/paper_models/`.
+    * New runs by a user will be stored in the adjacent `models/` directories.
 
 ### Citation 
 
@@ -114,4 +145,4 @@ To generate the results in the paper, the notebook `src/training/MVEUDA/ModelViz
 ```
 
 ### Acknowledgement 
-This project is a part of the DeepSkies group, with advisors Alex Ciprijanovic and Brian Nord. We greatly appreciate advice and contributions from Jason Poh, Paxson Swierc, Megan Zhao and Becky Nevin -- this work would be impossible without building on their earlier discoveries. We used the Fermilab Elastic Analysis Facility (EAF) for computational and storage purposes in this project. Additionally, this project has used data from both the Dark Energy Survey and Dark Energy CAM Legacy Survey DR10 to generate realistic data - we thank the collaborations for making their catalogs accessible.
+This project is a part of the DeepSkies group. We greatly appreciate advice and contributions from Jason Poh, Paxson Swierc, Megan Zhao and Becky Nevin -- this work would be impossible without building on their earlier discoveries. We used the Fermilab Elastic Analysis Facility (EAF) for computational and storage purposes in this project. Additionally, this project has used data from both the Dark Energy Survey and Dark Energy CAM Legacy Survey DR10 to generate realistic data - we thank the collaborations for making their catalogs accessible.
