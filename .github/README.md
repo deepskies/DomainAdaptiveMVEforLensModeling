@@ -2,21 +2,34 @@
 
 ![status](https://img.shields.io/badge/License-MIT-lightgrey)
 
+---
+
+This project combines Domain Adaptation (DA) with neural network (NN) Uncertainty Quantification (UQ) in the context of strong gravitational lens parameter prediction. We hope that this work helps take a step towards more accurate applications of deep learning models to real observed datasets, especially when the latter have limited labels. We predict the Einstein radius $\theta_\mathrm{E}$ from simulated multi-band images of strong gravitational lenses. Generally, to our knowledge, this is the first work in which domain adaptation and uncertainty quantification are combined, including for regression on an astrophysics dataset.
+
+### UQ: Mean-variance Estimation (MVE)
+
+For UQ, we use a mean-variance estimation (MVE) NN to predict the Einstein radius $\theta_\mathrm{E}$ and its aleatoric uncertainty $\sigma_\mathrm{al}$. 
+Scientific analysis requires an estimate of uncertainty on measurements. We adopt an approach known as mean-variance estimation, which seeks to estimate the variance and control regression by minimizing the beta negative log-likelihood loss.
+
+
+### Unsupervised Domain Adaptation (UDA)
+
+Applying deep learning in science fields like astronomy can be difficult. When models trained on simulated data are applied to real data, the models frequently underperform because simulations rarely perfectly capture the full complexity of real data. Enter domain adaptation (DA), a framework for 
+
+In this work, we use unsupervised DA (UDA), where the target data The DA technique used in this work use Maximum Mean Discrepancy (MMD) Loss to train a network to being embeddings of labeled "source" data gravitational lenses in line with unlabeled "target" gravitational lenses. With source and target datasets made similar, training on source datasets can be used with greater fidelity on target datasets.
+Unuspervised DA aligns an unlabelled "target" dataset with a labeled "source" dataset, so that predictions can be performed on both with accuracy. That target domain has a domain shift that must be aligned. In our case, we add realistic astrophysical survey-like noise to strong lensing images in the target dataset, but no noise in the source dataset. 
+
 ![plot](../src/training/MVEUDA/figures/isomap_final.png)
 
----
-This project combines the emerging field of Domain Adaptation with Uncertainty Quantification, working towards applying machine learning to real scientific datasets with limited labelled data. For this project, simulated images of strong gravitational lenses are used as source and target dataset, and the Einstein radius $\theta_E$ and its aleatoric uncertainty $\sigma_\textrm{al}$ are determined through regression. 
 
-Applying machine learning in science domains such as astronomy is difficult. With models trained on simulated data being applied to real data, models frequently underperform - simulations cannot perfectlty capture the true complexity of real data. Enter domain adaptation (DA). The DA techniques used in this work use Maximum Mean Discrepancy (MMD) Loss to train a network to being embeddings of labelled "source" data gravitational lenses in line with unlabeled "target" gravitational lenses. With source and target datasets made similar, training on source datasets can be used with greater fidelity on target datasets.
 
-Scientific analysis requires an estimate of uncertainty on measurements. We adopt an approach known as mean-variance estimation, which seeks to estimate the variance and control regression by minimizing the beta negative log-likelihood loss. To our knowledge, this is the first time that domain adaptation and uncertainty quantification are being combined, especially for regression on an astrophysical dataset.
 
 #### Coded By: [Shrihan Agarwal](https://github.com/ShrihanSolo)
 ---
 
-### Datasets
 
-Domain Adaptation aligns an unlabelled "target" dataset with a labelled "source" dataset, so that predictions can be performed on both with accuracy. That target domain has a domain shift that must be aligned. In our case, we add realistic astrophysical survey-like noise to strong lensing images in the target data set, but no noise in the source dataset. For this project, both source and target datasets are generated using ```deeplenstronomy```. Below we show a single 3-band image simulated using the no-noise source dataset and DES-like noise target dataset, as a comparison.
+### Datasets
+Both source and target datasets are generated using ```deeplenstronomy```. Below, we show a single 3-band image simulated using the no-noise source dataset and DES-like noise target dataset as a comparison.
 
 ![plot](../src/training/MVEUDA/figures/source_example.png)
 
@@ -96,7 +109,7 @@ AdaptiveMVEforLensModeling/
 ```
 ---
 
-### Reproduction
+### Reproducing Paper Results
 
 #### Acquiring The Dataset
 
@@ -128,6 +141,7 @@ AdaptiveMVEforLensModeling/
 * To generate the results in the paper use the notebook `src/training/MVEUDA/ModelVizPaper.ipynb`.
     * Final figures from this notebook are stored in `src/training/MVEUDA/figures/`. 
     * Saved PyTorch models of the runs are provided in `src/training/MVE*/paper_models/`.
+
 
 
 <br>
