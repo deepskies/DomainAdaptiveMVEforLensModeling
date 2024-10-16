@@ -4,7 +4,7 @@
 
 
 <p align="justify"> 
-This project combines Domain Adaptation (DA) with neural network (NN) Uncertainty Quantification (UQ) in the context of strong gravitational lens parameter prediction. We hope that this work helps take a step towards more accurate applications of deep learning models to real observed datasets, especially when the latter have limited labels. We predict the Einstein radius $\theta_\mathrm{E}$ from simulated multi-band images of strong gravitational lenses. Generally, to our knowledge, this is the first work in which domain adaptation and uncertainty quantification are combined, including for regression on an astrophysics dataset.
+This project combines Domain Adaptation (DA) with neural network Uncertainty Quantification (UQ) in the context of strong gravitational lens parameter prediction. We hope that this work helps take a step towards more accurate applications of deep learning models to real observed datasets, especially when the latter have limited labels. We predict the Einstein radius $\theta_\mathrm{E}$ from simulated multi-band images of strong gravitational lenses. Generally, to our knowledge, this is the first work in which domain adaptation and uncertainty quantification are combined, including for regression on an astrophysics dataset.
 </p>
 
 &nbsp;
@@ -23,11 +23,11 @@ For UQ, we use a mean-variance estimation (MVE) NN to predict the Einstein radiu
 ## Unsupervised Domain Adaptation (UDA)
 
 <p align="justify">
-Applying deep learning in science fields like astronomy can be difficult. When models trained on simulated data are applied to real data, the models frequently underperform because simulations rarely perfectly capture the full complexity of real data. Enter domain adaptation (DA), a framework for 
+Applying deep learning in science contexts like astronomy presents multiple challenges. For example, when models trained on simulated data are applied to real data, they tend to underperform because simulations rarely adequately capture the complexity of real data. Enter domain adaptation (DA), a framework for 
 </p>
 
 <p align="justify"> 
-In this work, we use unsupervised DA (UDA), where the target data The DA technique used in this work, we use Maximum Mean Discrepancy (MMD) Loss to train a network to being embeddings of labeled "source" data gravitational lenses in line with unlabeled "target" gravitational lenses. With source and target datasets made similar, training on source datasets can be used with greater fidelity on target datasets. Unsupervised DA aligns an unlabelled "target" dataset with a labeled "source" dataset so that predictions can be performed on both with accuracy. That target domain has a domain shift that must be aligned. In our case, we add realistic astrophysical survey-like noise to strong lensing images in the target dataset but no noise in the source dataset. 
+In this work, we use unsupervised DA (UDA), where the target data The DA technique used in this work, we use the Maximum Mean Discrepancy (MMD) Loss to train a network to being embeddings of labeled source gravitational lenses in line with unlabeled "target" gravitational lenses. With source and target datasets made similar, training on source datasets can be used with greater fidelity on target datasets. Unsupervised DA aligns an unlabelled "target" dataset with a labeled "source" dataset so that predictions can be performed on both with accuracy. That target domain has a domain shift that must be aligned. In our case, we add realistic astrophysical survey-like noise to strong lensing images in the target dataset but no noise in the source dataset. 
 </p>
 &nbsp;
 
@@ -41,7 +41,7 @@ In this work, we use unsupervised DA (UDA), where the target data The DA techniq
 
 <p align="justify">
   
-Both source and target datasets are generated using `deeplenstronomy`. In the figure below, we show a single simulated strong lens in three bands ($g$, $r$, $z$) without noise (source domain; upper panel) and with DES-like noise (target domain; lower panel). The datasets (images and labels) can be downloaded from the project's zenodo site: [zenodo: Neural network prediction of strong lensing systems with domain adaptation and uncertainty quantification
+We generate strong lensing images for training and testing with `deeplenstronomy`. In the figure below, we show a single simulated strong lens in three bands ($g$, $r$, $z$) without noise (source domain; upper panel) and with DES-like noise (target domain; lower panel). The datasets (images and labels) can be downloaded from the project's zenodo site: [zenodo: Neural network prediction of strong lensing systems with domain adaptation and uncertainty quantification
 ](https://zenodo.org/records/13647416).
 
 &nbsp;
@@ -81,11 +81,11 @@ A `yaml` file (i.e., `training_env.yml`) is required for training the `pytorch` 
 
 * __Option A: Generate the Dataset__
     * Navigate to `src/sim/notebooks/`.
-    * Generate a source/target data pair in the `src/data/` directory by running `gen_sim.py` on `src/sim/config/source_config.yaml` and `target_config.yaml`:
-        * > gen_sim.py src/sim/config/source_config.yaml target_config.yaml
+    * Generate a source/target data pair in the `src/data/` directory by running `gen_sim.py` on the yaml files (`src/sim/config/source_config.yaml` and `src/sim/config/target_config.yaml` for source and target, respectively):
+        * > gen_sim.py src/sim/config/source_config.yaml src/sim/config/target_config.yaml
   
 * __Option B: Download the Dataset__
-    * Zip files of the dataset are available at https://zenodo.org/records/13647416.
+    * Zip files of the dataset are available through (zenodo)[https://zenodo.org/records/13647416].
     * The source and target data downloaded should be added to the `src/data/` directory.
         * Move or copy the directories `mb_paper_source_final` and `mb_paper_target_final` into the `src/data/` directory.
 
@@ -95,12 +95,12 @@ A `yaml` file (i.e., `training_env.yml`) is required for training the `pytorch` 
 
 * __MVE-Only__
     * Navigate to `src/training/MVEonly/MVE_noDA_RunA.ipynb` (or Run B, C, D, E)
-    * Activate the `neural` conda environment:
-    * Run training by running the notebook.
-    * New runs by a user will be stored in the adjacent `models/` directories.
+    * Activate the conda environment that is related training:
+    * Use the notebook `src/sim/notebooks/training.ipynb`.
+    * Trained model parameters will be stored in the `models/` directory.
     
 * __MVE-UDA__
-    * Follow an identical procedure to the above, except that the base path is `src/training/MVEUDA/`.
+    * Follow an identical procedure to the above, replacing `src/training/MVEonly/` with `src/training/MVEUDA/`.
 
 &nbsp;
 
