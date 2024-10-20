@@ -13,7 +13,7 @@ This project combines Domain Adaptation (DA) with neural network Uncertainty Qua
 ## UQ: Mean-variance Estimation (MVE)
 
 <p align="justify"> 
-For UQ, we use a mean-variance estimation (MVE) NN to predict the Einstein radius $\theta_\mathrm{E}$ and its aleatoric uncertainty $\sigma_\mathrm{al}$. Scientific analysis requires an estimate of uncertainty on measurements. We adopt an approach known as mean-variance estimation, which seeks to estimate the variance and control regression by minimizing the beta negative log-likelihood loss.
+For UQ, we use a mean-variance estimation (MVE) network to predict the Einstein radius $\theta_\mathrm{E}$ and its aleatoric uncertainty $\sigma_\mathrm{al}$. Scientific analysis requires an estimate of uncertainty on measurements. We adopt an approach known as mean-variance estimation, which seeks to estimate the variance and control regression by minimizing the beta negative log-likelihood loss.
 </p>
 
 &nbsp;
@@ -23,12 +23,13 @@ For UQ, we use a mean-variance estimation (MVE) NN to predict the Einstein radiu
 ## Unsupervised Domain Adaptation (UDA)
 
 <p align="justify">
-Applying deep learning in science contexts like astronomy presents multiple challenges. For example, when models trained on simulated data are applied to real data, they tend to underperform because simulations rarely adequately capture the complexity of real data. Enter domain adaptation (DA), a framework for 
+Applying deep learning in science contexts like astronomy presents multiple challenges. For example, when models trained on simulated data are applied to real data, they tend to underperform because simulations rarely adequately represent the complexity of real data. Domain adaptation (DA) is a class of algorithms that are designed to address biases that can result from training networks on one data set and applying them to test data, where the training and testing data have significantly different generating parameters and/or features. Typically, the source data are from one domain, and the target data are from another distinct domain --- e.g., the data-generating parameters have different prior distributions. 
 </p>
 
 <p align="justify"> 
-In this work, we use unsupervised DA (UDA), where the target data The DA technique used in this work, we use the Maximum Mean Discrepancy (MMD) Loss to train a network to being embeddings of labeled source gravitational lenses in line with unlabeled "target" gravitational lenses. With source and target datasets made similar, training on source datasets can be used with greater fidelity on target datasets. Unsupervised DA aligns an unlabelled "target" dataset with a labeled "source" dataset so that predictions can be performed on both with accuracy. That target domain has a domain shift that must be aligned. In our case, we add realistic astrophysical survey-like noise to strong lensing images in the target dataset but no noise in the source dataset. 
+Usually, a supervised DA algorithm uses a large amount of labeled source data and a small amount of unlabeled target data to bridge the gap between domains. In this work, we use unsupervised DA (UDA), where the target data do not have labels. Unsupervised DA aligns the latent space embedding of an unlabeled target dataset with that of a labeled source dataset so that predictions can be performed on both. We use the Maximum Mean Discrepancy (MMD) loss to train a network of labeled source lenses in combination with unlabeled target lenses. That target domain has a domain shift that must be aligned. In this work, we use noise parameter settings to incur a domain shift between the source and target data: the source data has no noise, while the target data has the noise of the Dark Energy Survey. 
 </p>
+
 &nbsp;
 
 <img src="../src/training/MVEUDA/figures/isomap_final.png" width=80% height=80%>
@@ -41,8 +42,7 @@ In this work, we use unsupervised DA (UDA), where the target data The DA techniq
 
 <p align="justify">
   
-We generate strong lensing images for training and testing with `deeplenstronomy`. In the figure below, we show a single simulated strong lens in three bands ($g$, $r$, $z$) without noise (source domain; upper panel) and with DES-like noise (target domain; lower panel). The datasets (images and labels) can be downloaded from the project's zenodo site: [zenodo: Neural network prediction of strong lensing systems with domain adaptation and uncertainty quantification
-](https://zenodo.org/records/13647416).
+We generate strong lensing images for training and testing with `deeplenstronomy`. In the figure below, we show a single simulated strong lens in three bands ($g$, $r$, $z$) without noise (source domain; upper panel) and with DES-like noise (target domain; lower panel). The datasets (images and labels) can be downloaded from the project's [Zenodo site](https://zenodo.org/records/13647416).
 
 &nbsp;
 
@@ -68,7 +68,12 @@ Create environments with `conda` for training and for simulation, respectively:
 
 <p align="justify">
   
-A `yaml` file (i.e., `training_env.yml`) is required for training the `pytorch` neural network model, and `deeplenstronomy_env.yml` is required for simulating strong lensing datasets with `deeplenstronomy`. There is a sky brightness-related bug in the PyPI 0.0.2.3 version of `deeplenstronomy`, and an update to the latest version will be required for reproduction of results. This works on Linux but has not been tested for Mac or Windows.
+A `yaml` file (i.e., `training_env.yml`) is required for training the `pytorch` neural network model, and `deeplenstronomy_env.yml` is required for simulating strong lensing datasets with `deeplenstronomy`. 
+
+This code works on Linux but has not been tested for Mac or Windows.
+
+There is a sky brightness-related bug in the PyPI 0.0.2.3 version of `deeplenstronomy`, and an update to the latest version will be required to reproduce the results. 
+
 </p>
 
 &nbsp;
@@ -85,7 +90,7 @@ A `yaml` file (i.e., `training_env.yml`) is required for training the `pytorch` 
         * > gen_sim.py src/sim/config/source_config.yaml src/sim/config/target_config.yaml
   
 * __Option B: Download the Dataset__
-    * Zip files of the dataset are available through (zenodo)[https://zenodo.org/records/13647416].
+    * Zip files of the dataset are available through [Zenodo](https://zenodo.org/records/13647416).
     * The source and target data downloaded should be added to the `src/data/` directory.
         * Move or copy the directories `mb_paper_source_final` and `mb_paper_target_final` into the `src/data/` directory.
 
@@ -94,10 +99,11 @@ A `yaml` file (i.e., `training_env.yml`) is required for training the `pytorch` 
 ### Training the Model
 
 * __MVE-Only__
-    * Navigate to `src/training/MVEonly/MVE_noDA_RunA.ipynb` (or Run B, C, D, E)
-    * Activate the conda environment that is related training:
-    * Use the notebook `src/sim/notebooks/training.ipynb`.
-    * Trained model parameters will be stored in the `models/` directory.
+    * Navigate to `src/training/MVEonly/MVE_noDA_RunA.ipynb` (or the notebook for runs B, C, D, or E)
+    * Activate the conda environment that is related to training:
+         * > source activate "..."
+    * Use the notebook `src/sim/notebooks/training.ipynb` to train the model.
+    * The trained model parameters will be stored in the `models/` directory.
     
 * __MVE-UDA__
     * Follow an identical procedure to the above, replacing `src/training/MVEonly/` with `src/training/MVEUDA/`.
@@ -167,10 +173,10 @@ DomainAdaptiveMVEforLensModeling/
 
 ## Citation 
 
-#### This code was produce by [Shrihan Agarwal](https://github.com/ShrihanSolo)
+This code was written by [Shrihan Agarwal](https://github.com/ShrihanSolo).
 
 ```tex
-@article{key , 
+@article{agarwal2024, 
     author = {Shrihan Agarwal, Aleksandra Ciprijanovic, Brian Nord}, 
     title = {Domain-adaptive neural network prediction with
     uncertainty quantification for strong gravitational lens
